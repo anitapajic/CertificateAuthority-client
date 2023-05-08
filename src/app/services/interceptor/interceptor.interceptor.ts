@@ -4,6 +4,7 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -14,7 +15,6 @@ export class Interceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const accessToken: any = localStorage.getItem('user');
-    const decodedItem = JSON.parse(accessToken);
 
     // if (req.headers.get('routeJson')){
     //   req = new HttpRequest('GET', req.url)
@@ -25,9 +25,17 @@ export class Interceptor implements HttpInterceptor {
       return next.handle(req);
      
     if (accessToken) {
+      const decodedItem: string = JSON.parse(accessToken)['token'];
+
+
+      console.log(decodedItem)      
+      // ovo append ne radi
       const cloned = req.clone({
-        headers: req.headers.set('Authorization', decodedItem['token']),
+        headers: req.headers.append('Authorization', decodedItem),
       });
+
+      console.log(cloned.headers)
+
       return next.handle(cloned);
     } 
     

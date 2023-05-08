@@ -70,7 +70,7 @@ export class AuthService {
 
   logout(): Observable<string> {
     this.userId = 0;
-    
+
     return this.http.get('http://localhost:8085/api/user/logout', {
       responseType: 'text',
     });
