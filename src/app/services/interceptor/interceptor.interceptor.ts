@@ -32,7 +32,7 @@ export class Interceptor implements HttpInterceptor {
       console.log(decodedItem)      
       // ovo append ne radi
       const cloned = req.clone({
-        headers: req.headers.set('Authorization', decodedItem),
+        headers: req.headers.set('Authorization', 'Bearer ' + decodedItem),
       });
 
       console.log(cloned.headers)

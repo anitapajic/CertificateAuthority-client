@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Token } from 'src/app/models/Token';
 import { strRepsonse } from 'src/app/models/strResponse';
+import { resetCode } from 'src/app/models/resetCode';
 
 
 @Injectable({
@@ -76,6 +77,16 @@ export class AuthService {
     });
   }
 
+
+  getResetCode(reset : resetCode): Observable<strRepsonse>{
+    return this.http.post<strRepsonse>('http://localhost:8085/api/user/getResetCode', reset)
+
+  }
+
+  resetPassword(reset : resetCode): Observable<strRepsonse>{
+    return this.http.post<strRepsonse>('http://localhost:8085/api/user/resetPassword', reset)
+
+  }
   // Phone verification
 
     // verify(user : IUser): Observable<string> {
