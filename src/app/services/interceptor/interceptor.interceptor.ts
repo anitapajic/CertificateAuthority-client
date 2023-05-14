@@ -20,6 +20,7 @@ export class Interceptor implements HttpInterceptor {
     //   req = new HttpRequest('GET', req.url)
     //   return next.handle(req);
     // } 
+    console.log(req)
 
     if (req.headers.get('skip'))
       return next.handle(req);
@@ -31,7 +32,7 @@ export class Interceptor implements HttpInterceptor {
       console.log(decodedItem)      
       // ovo append ne radi
       const cloned = req.clone({
-        headers: req.headers.append('Authorization', decodedItem),
+        headers: req.headers.set('Authorization', decodedItem),
       });
 
       console.log(cloned.headers)
