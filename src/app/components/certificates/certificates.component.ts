@@ -16,7 +16,7 @@ export class CertificatesComponent implements OnInit {
   
   ngOnInit(): void {
 
-    this.certService.getAll().subscribe({
+    this.certService.getAlCertificates().subscribe({
       next: (result) => {
         console.log("Res ", result)
         this.certificates = result;
