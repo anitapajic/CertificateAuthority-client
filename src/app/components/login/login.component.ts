@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     });
     this.userForm = new FormGroup({
       username: new FormControl(''),
-      password: new FormControl(''),
+      password: new FormControl('', [Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-_])[A-Za-z\d@$!%*?&]{8,}$/)]),
       confirmedPassword: new FormControl(''),
       name: new FormControl(''),
       lastname: new FormControl(''),
@@ -120,6 +120,11 @@ export class LoginComponent implements OnInit {
         }
       })
       
+    }
+
+    isInvalidPassword() {
+      const passwordControl = this.userForm.get('password');
+      return passwordControl?.touched && passwordControl?.invalid;
     }
 
     resetPassword(){

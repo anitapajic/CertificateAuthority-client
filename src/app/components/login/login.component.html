@@ -6,7 +6,7 @@
 			<input type="text" placeholder="Name" formControlName="name"/>
 			<input type="text" placeholder="Lastname" formControlName="lastname"/>
 			<input type="text" placeholder="Telephone" formControlName="telephone"/>
-			<input type="password" placeholder="Password" formControlName="password"/>
+			<input type="password" placeholder="Password" formControlName="password"     [ngClass]="{ 'invalid-password': isInvalidPassword() }"/>
 			<input type="password" placeholder="Confirm password" formControlName="confirmedPassword"/>
 			<button (click)="signUp()">Sign Up</button>
 		</form>
