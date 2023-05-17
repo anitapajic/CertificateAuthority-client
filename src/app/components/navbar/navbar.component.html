@@ -3,17 +3,20 @@
   <div class="header-container">
     <h1></h1>
     <div class="button-container">
-      <a class="a" (click)="hello()" >Account</a>
+      <a class="a" [routerLink]="'/account'" >Account</a>
       <button (click)="logout()">Log out</button>
     </div>
   </div>
+
+
+  <!-- ovaj div treba da stoji samo u home componenti -->
   <div>
     <div class="row">
       <div class="col-6">
         <h1>WELCOME, TO <span style="color:#3cd0d3;">THE CERTIFICATE</span> LAB</h1>
         <h3>Would you like to make new certificate?</h3>
         <div class="btn-container">
-            <button id="moreBtn" class="btn" type="button">New certificate</button>
+            <button id="moreBtn" class="btn" type="button"  [routerLink]="'/makeRequest'">New certificate</button>
           </div>
     </div>
     <div class="col-5">
@@ -21,5 +24,6 @@
     </div>
     </div>
   </div>
+
 </header>
  
