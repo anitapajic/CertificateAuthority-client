@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     });
     this.userForm = new FormGroup({
       username: new FormControl(''),
-      password: new FormControl('', [Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-_])[A-Za-z\d@$!%*?&]{8,}$/)]),
+      password: new FormControl('', [Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-_])[A-Za-z\d@$!%*?&-_]{8,}$/)]),
       confirmedPassword: new FormControl(''),
       name: new FormControl(''),
       lastname: new FormControl(''),
@@ -90,9 +90,15 @@ export class LoginComponent implements OnInit {
       this.authService.signUp(user).subscribe({
         next: (result) => {
           alert("Check your email!")
+          this.userForm.reset();
+
         },
         error: (error) => {
-          console.log(error)
+          if (error instanceof HttpErrorResponse) {
+            alert(error.error['response'])
+            console.error(error.error['response']);
+          }
+
         }
       })
       

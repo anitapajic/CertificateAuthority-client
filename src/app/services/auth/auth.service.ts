@@ -65,7 +65,7 @@ export class AuthService {
   }
 
   signUp(user: IUser): Observable<strRepsonse> {
-    return this.http.post<strRepsonse>(
+    return this.http.post<any>(
       'http://localhost:8085/api/user/register', user);
   }
 
