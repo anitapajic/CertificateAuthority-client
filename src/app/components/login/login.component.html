@@ -6,19 +6,47 @@
 			<input type="text" placeholder="Name" formControlName="name"/>
 			<input type="text" placeholder="Lastname" formControlName="lastname"/>
 			<input type="text" placeholder="Telephone" formControlName="telephone"/>
-			<input type="password" placeholder="Password" formControlName="password"/>
+			<input type="password" placeholder="Password" formControlName="password"     [ngClass]="{ 'invalid-password': isInvalidPassword() }"/>
 			<input type="password" placeholder="Confirm password" formControlName="confirmedPassword"/>
 			<button (click)="signUp()">Sign Up</button>
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="#" [formGroup]="userForm">
+		<form action="#" [formGroup]="userForm" *ngIf="!resetPass">
 			<h1>Sign in</h1>
 			<input type="email" placeholder="Email" formControlName="username"/>
 			<input type="password" placeholder="Password" formControlName="password"/>
-			<a href="#">Forgot your password?</a>
+			<a (click)="forgotPass()">Forgot your password?</a>
 			<button (click)="signIn()" >Sign In</button>
 		</form>
+		<form action="#" [formGroup]="resetForm" *ngIf="resetPass">
+			<h1>Reset password</h1>
+
+			<div  *ngIf="!codeIsSent">
+				<label for="type">Choose option: </label>
+				<select formControlName="type">
+					<option value="0">Telephone</option>
+					<option value="1">Mail</option>
+				</select>
+				
+				<input type="phone" placeholder="Telephone" formControlName="telephone" *ngIf="resetForm.get('type')?.value === '0'" />
+				<input type="email" placeholder="Email" formControlName="username" *ngIf="resetForm.get('type')?.value === '1'" />
+				<button (click)="getResetCode()" >GET RESET CODE</button>
+
+			</div>
+
+			<div  *ngIf="codeIsSent">
+				<input type="text" placeholder="Code" formControlName="code">
+				<input type="password" placeholder="New Password" formControlName="newPassword"/>
+				<input type="password" placeholder="Confirm Password" formControlName="newConfirmed"/>
+				<button (click)="resetPassword()" >RESET PASSWORD</button>
+
+			</div>
+			<a (click)="forgotPass()">Go back</a>
+		</form>
+
+
+
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">

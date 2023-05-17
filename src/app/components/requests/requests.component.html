@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+
+<h1>ALL REQUESTS </h1>
+<div *ngFor="let req of requests">
+    <p>{{req.id}}</p>
+    <p>{{req.issuer}}</p>
+    <p>{{req.subjectUsername}}</p>
+    <p>{{req.validTo}}</p>
+    <p>{{req.certificateType}}</p>
+    <p>{{req.state}}</p>
+</div>
+
+<app-footer></app-footer>

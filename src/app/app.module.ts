@@ -11,6 +11,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+import { CertificatesComponent } from './components/certificates/certificates.component';
+import { RequestsComponent } from './components/requests/requests.component';
+import { AccountComponent } from './components/account/account.component';
+import { MakeRequestComponent } from './components/make-request/make-request.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { HomeComponent } from './components/home/home.component';
     NavbarComponent,
     MenuComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    CertificatesComponent,
+    RequestsComponent,
+    AccountComponent,
+    MakeRequestComponent
   ],
   imports: [
     BrowserModule,

@@ -2,27 +2,27 @@
         <!--<h3 class="title">Make your choice</h3>
         <div class="line"></div>-->
     <div class="circles-container">
-      <div class="circle-container">
+      <div class="circle-container" [routerLink]="'/account'">
         <div class="circle">
           <div class="circle-text">A</div>
         </div>
         <div class="circle-label">Account</div>
       </div>
-      <div class="circle-container">
+      <div class="circle-container" [routerLink]="'/certificates'">
         <div class="circle">
           <div class="circle-text">C</div>
         </div>
-        <div class="circle-label">Certificates</div>
+        <div class="circle-label"  >Certificates</div> 
       </div>
     </div>
-    <div class="circles-container">
+    <div class="circles-container" [routerLink]="'/requests'">
       <div class="circle-container">
         <div class="circle">
           <div class="circle-text">R</div>
         </div>
         <div class="circle-label">Requests</div>
       </div>
-      <div class="circle-container">
+      <div class="circle-container" [routerLink]="'/makeRequest'">
         <div class="circle">
           <div class="circle-text">M</div>
         </div>
