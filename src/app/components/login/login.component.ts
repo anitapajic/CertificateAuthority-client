@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       type: new FormControl('1'),
       username: new FormControl(''),
       telephone: new FormControl('', [Validators.required, Validators.pattern(/^\+38[0-9][1-9]{1}[0-9]{7}([0-9]{1})?$/)]),
-      newPassword: new FormControl(''),
+      newPassword: new FormControl('', [Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-_])[A-Za-z\d@$!%*?&-_]{8,}$/)]),
       newConfirmed: new FormControl(''),
       code: new FormControl(''),
     });
@@ -72,7 +72,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         error:(error) => {
-          console.log(error)
+          if(error['error'] == "You need to change your password!"){
+            alert(error['error'])
+            this.forgotPass();
+          }
+          else{
+            console.log(error)
+
+          }
         }
       })
     }
@@ -135,6 +142,11 @@ export class LoginComponent implements OnInit {
 
     resetPassword(){
       const reset : resetCode = this.resetForm.value;
+      if (!this.resetForm.get('newPassword')!.valid) {
+        alert('Password must contaion number, upper and lower character and be minimum 8 charactesrs long')
+        return;
+      }
+
       if(reset.newPassword != reset.newConfirmed){
         alert('New and confirmed password do not match')
         return;
@@ -143,8 +155,9 @@ export class LoginComponent implements OnInit {
       this.authService.resetPassword(reset).subscribe({
         next: (result) => {
           this.codeIsSent = false;
+          this.resetPass = false;
           alert(result.response)
-          this.router.navigate(['/login']);
+          this.userForm.get('password')!.reset();
         },
         error: (error) => {
           alert(error.error['response'])
