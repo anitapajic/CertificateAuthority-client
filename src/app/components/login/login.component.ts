@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../../models/IUser';
+import { IUser, LoginDTO, TwoFactor, twoFactorType } from '../../models/IUser';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   resetForm!: FormGroup;
   resetPass : Boolean = false;
   codeIsSent: Boolean = false;
+  twoFactorCodeIsSent: Boolean = false;
 
 
   public constructor(private authService : AuthService, private router : Router){}
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
       lastname: new FormControl(''),
       telephone: new FormControl('', [Validators.required, Validators.pattern(/^\+38[0-9][1-9]{1}[0-9]{7}([0-9]{1})?$/)]),
       code: new FormControl(''),
+      type : new FormControl('0')
     });
 
     this.resetForm = new FormGroup({
@@ -63,8 +65,14 @@ export class LoginComponent implements OnInit {
 
     signIn(){
       const user: IUser = this.userForm.value;
+      const login : LoginDTO = {
+        username : user.username,
+        password : user.password,
+        code : user.code,
+        type : twoFactorType.EMAIL
+      }
 
-      this.authService.signIn(user).subscribe({
+      this.authService.signIn(login).subscribe({
         next: (result) => {
           localStorage.setItem('user', JSON.stringify(result));
           this.authService.setUser();
@@ -122,6 +130,28 @@ export class LoginComponent implements OnInit {
             console.error(error.error['response']);
             
 
+          }
+        }
+      })
+      
+    }
+
+    getTwoFactoreCode(){
+      const user : IUser = this.userForm.value;
+
+      const twoFactor : TwoFactor = {
+        type : user.type,
+        username : user.username
+      }
+
+      this.authService.getTwoFactoreCode(twoFactor).subscribe({
+        next: (result) => {
+          this.twoFactorCodeIsSent = !this.twoFactorCodeIsSent;
+        },
+        error: (error) => {
+          if (error instanceof HttpErrorResponse) {
+            alert(error.error['response'])
+            console.error(error.error['response']);
           }
         }
       })

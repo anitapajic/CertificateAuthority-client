@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IUser } from 'src/app/models/IUser';
+import { IUser, LoginDTO, TwoFactor } from 'src/app/models/IUser';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Token } from 'src/app/models/Token';
@@ -57,11 +57,9 @@ export class AuthService {
 
   // Login and Registration
 
-  signIn(user: IUser): Observable<Token> {
+  signIn(user: LoginDTO): Observable<Token> {
     return this.http.post<Token>(
-      'http://localhost:8085/api/user/login', user, {
-        headers: this.headers,
-    });
+      'http://localhost:8085/api/user/login', user);
   }
 
   signUp(user: IUser): Observable<strRepsonse> {
@@ -77,7 +75,10 @@ export class AuthService {
     });
   }
 
+  getTwoFactoreCode(twoFactor : TwoFactor): Observable<strRepsonse>{
+    return this.http.post<strRepsonse>('http://localhost:8085/api/user/twoFactor', twoFactor)
 
+  }
   getResetCode(reset : resetCode): Observable<strRepsonse>{
     return this.http.post<strRepsonse>('http://localhost:8085/api/user/getResetCode', reset)
 
