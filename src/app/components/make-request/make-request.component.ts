@@ -32,8 +32,7 @@ export class MakeRequestComponent {
     this.requestForm = this.formBuilder.group({
       issuer: ['', Validators.required],
       validTo: ['', Validators.required],
-      certificateType: ['', Validators.required],
-      state: [RequestStatus.PENDING, Validators.required],
+      //certificateType: ['', Validators.required],
       subjectUsername: ['', Validators.required],
       reason: [null],
       issuerUsername: ['', Validators.required],

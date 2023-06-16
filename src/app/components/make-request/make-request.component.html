@@ -6,31 +6,37 @@
 <h1 class="title">MAKE REQUEST</h1>
 <hr class="separator">
 <div class="card-container ">
+
     <form [formGroup]="requestForm" (ngSubmit)="submitForm()" class="form-container">
+
         <div class="form-group">
           <label class="form-label" for="issuer" [class.active]="requestForm.controls['issuer'].value">Issuer:</label>
-          <input type="text" id="issuer" formControlName="issuer" required>
+          <input type="text" id="issuer" formControlName="issuer" >
         </div>
+
         <div class="form-group">
           <label class="form-label" for="validTo" [class.active]="requestForm.controls['validTo'].value"></label>
-          <input type="date" id="validTo" formControlName="validTo" placeholder="" required>
+          <input type="date" id="validTo" formControlName="validTo" placeholder="" >
         </div>
-        <div class="form-group">
+
+        <!-- <div class="form-group">
             <label class="form-label" for="certificateType" [class.active]="requestForm.controls['certificateType'].value">Certificate Type:</label>
-            <select id="certificateType" formControlName="certificateType" required>
+            <select id="certificateType" formControlName="certificateType" >
               <option [ngValue]="null" disabled [selected]="!requestForm.controls['certificateType'].value"></option>
               <option *ngFor="let type of certTypes" [value]="type">{{ type }}</option>
             </select>
-          </div>
+          </div> -->
        
         <div class="form-group">
           <label class="form-label" for="subjectUsername" [class.active]="requestForm.controls['subjectUsername'].value">Subject Username:</label>
-          <input type="text" id="subjectUsername" formControlName="subjectUsername" required>
+          <input type="text" id="subjectUsername" formControlName="subjectUsername" >
         </div>
+
         <div class="form-group">
           <label class="form-label" for="reason" [class.active]="requestForm.controls['reason'].value">Reason:</label>
           <textarea id="reason" formControlName="reason"></textarea>
         </div>
+
         <div class="form-group">
             <div class="g-recaptcha" data-sitekey="6LdSTJ8mAAAAAAVVK5_mZUUVKl-kEDPhl6YZz_Z7">
                 <form [formGroup]="aFormGroup">
@@ -41,16 +47,14 @@
                   </form>
             </div>
           </div>
+
         <div class="form-group">
           <label class="form-label" for="issuerUsername" [class.active]="requestForm.controls['issuerUsername'].value">Issuer Username:</label>
-          <input type="text" id="issuerUsername" formControlName="issuerUsername" required>
+          <input type="text" id="issuerUsername" formControlName="issuerUsername" >
         </div>
         <button type="submit" [disabled]="requestForm.invalid">Submit</button>
      
-      </form>
-      
-      
-      
+      </form>      
 </div>
 </div>
 <app-footer></app-footer>
