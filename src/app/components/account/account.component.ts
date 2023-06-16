@@ -34,22 +34,23 @@ export class AccountComponent {
 
   validateCertificate(sn: string){
     console.log(sn)
-    this.certService.validateCertficateBySN(sn).subscribe({
-      next: (result) => {
-        console.log("Res ", result)
-      this.isValidCertificate = true; 
-      this.isInValidCertificate = false; 
-      },
-      error: (error) => {
-        if (error instanceof HttpErrorResponse) {
-          // alert(error.error)
-          console.log("ERR ", error);
-        
-         this.isInValidCertificate = true; 
-         this.isValidCertificate = false; 
-        }
+    this.certService.validateCertficateBySN(sn).subscribe(
+      (result) => {
+      console.log("Res ", result)
+      if(result.includes('invalid')){
+        this.isValidCertificate = false; 
+        this.isInValidCertificate = true; 
       }
-    })
+      else if(result.includes('valid')){
+        this.isValidCertificate = true; 
+        this.isInValidCertificate = false; 
+      }
+      else{
+        console.log(result)
+      }
+
+      }
+    )
   }
 
   validateCertficateByC(file : File){

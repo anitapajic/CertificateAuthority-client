@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Certificate } from 'src/app/models/Certificate';
 import { RejectinReason, Request } from 'src/app/models/Request';
+import { strRepsonse } from 'src/app/models/strResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class CertService {
   }
 
   validateCertficateBySN(sn : string): Observable<any> {
-    return this.http.get('http://localhost:8085/api/certificate/validate/'+ sn)
+    return this.http.get('http://localhost:8085/api/certificate/validate/'+ sn, { responseType: 'text' })
   }
 
   validateCertficateByCopy(file : File): Observable<any> {
