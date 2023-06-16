@@ -5,6 +5,8 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { resetCode } from 'src/app/models/resetCode';
 import { HttpErrorResponse } from '@angular/common/http';
+import {GoogleLoginProvider, SocialAuthService, SocialUser} from "@abacritt/angularx-social-login";
+import {Token} from "src/app/models/Token";
 
 @Component({
   selector: 'app-login',
@@ -17,16 +19,13 @@ export class LoginComponent implements OnInit {
   resetForm!: FormGroup;
   resetPass : Boolean = false;
   codeIsSent: Boolean = false;
+  socialUser!: SocialUser;
+  loggedIn!: boolean;
 
+  public constructor(private authService : AuthService, private router : Router,private socialAuthService: SocialAuthService){}
 
-  public constructor(private authService : AuthService, private router : Router){}
-  
   ngOnInit() {
 
-
-    // if(this.authService.isLoggedIn()){
-    //   this.router.navigate(['/home']);
-    // }
 
     const signUpButton = document.getElementById('signUp') as HTMLElement | any;
     const signInButton = document.getElementById('signIn') as HTMLElement | any;
@@ -35,7 +34,7 @@ export class LoginComponent implements OnInit {
     signUpButton.addEventListener('click', () => {
       container.classList.add("right-panel-active");
     });
-    
+
     signInButton.addEventListener('click', () => {
       container.classList.remove("right-panel-active");
     });
@@ -58,8 +57,34 @@ export class LoginComponent implements OnInit {
       code: new FormControl(''),
     });
 
-    };
+    this.socialAuthService.authState.subscribe((user) => {
+      this.socialUser = user;
+      this.loggedIn = (user != null);
+      console.log(this.socialUser);
+      const tokenGoogle : Token = {
+        "token" : this.socialUser.idToken,
+      }
+      this.authService.google(tokenGoogle).subscribe({
+          next: (result) => {
+            console.log(result)
+            localStorage.setItem('user', JSON.stringify(result));
+            this.authService.setUser();
+            console.log(this.authService.getRole())
+            this.router.navigate(['/home']);
+          },
+          error:(error) => {
+            console.log(error)
+          }
+        }
+      )
 
+    });
+
+  }
+
+  refreshToken(): void {
+    this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+  }
 
     signIn(){
       const user: IUser = this.userForm.value;
@@ -102,7 +127,7 @@ export class LoginComponent implements OnInit {
 
         }
       })
-      
+
     }
 
     forgotPass() {
@@ -121,12 +146,12 @@ export class LoginComponent implements OnInit {
           if (error instanceof HttpErrorResponse) {
             alert(error.error['response'])
             console.error(error.error['response']);
-            
+
 
           }
         }
       })
-      
+
     }
 
     isInvalidPassword() {
@@ -153,6 +178,7 @@ export class LoginComponent implements OnInit {
         }
       })
     }
+
 
 }
 

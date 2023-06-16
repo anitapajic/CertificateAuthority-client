@@ -7,6 +7,9 @@ import { Token } from 'src/app/models/Token';
 import { strRepsonse } from 'src/app/models/strResponse';
 import { resetCode } from 'src/app/models/resetCode';
 
+const oauthHeader = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,15 +29,13 @@ export class AuthService {
     skip: 'true',
   });
 
-
   getRole(): any {
     if (this.isLoggedIn()) {
       var accessToken: any = localStorage.getItem('user');
       const helper = new JwtHelperService();
-      
+
 
       this.userId = JSON.parse(accessToken)['id'];
-      // const role = helper.decodeToken(accessToken).role[0].authority;
 
       //ovo je username
       const role = helper.decodeToken(accessToken).sub;
@@ -64,6 +65,10 @@ export class AuthService {
     });
   }
 
+  public google(tokenDTO : Token): Observable<Token>{
+    return this.http.post<Token>('http://localhost:8085/api/user/login/google', tokenDTO, {headers: this.headers});
+  }
+
   signUp(user: IUser): Observable<strRepsonse> {
     return this.http.post<any>(
       'http://localhost:8085/api/user/register', user);
@@ -91,7 +96,7 @@ export class AuthService {
 
     // verify(user : IUser): Observable<string> {
     //   this.userId = 0;
-      
+
     //   return this.http.get('http://localhost:8085/api/user/logout', {
     //     responseType: 'text',
     //   });
