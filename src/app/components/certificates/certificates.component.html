@@ -1,15 +1,20 @@
 <app-navbar></app-navbar>
 
-
-<h1>CERTIFICATES</h1>
-<div *ngFor="let cert of certificates">
-    <p>{{cert.serialNumber}}</p>
-    <p>{{cert.issuer}}</p>
-    <p>{{cert.validFrom}}</p>
-    <p>{{cert.validTo}}</p>
-    <p>{{cert.certificateType}}</p>
-    <p>{{cert.status}}</p>
-
+<div class="margin">
+<h1 class="title">CERTIFICATES</h1>
+<hr class="separator">
+<div class="card-container">
+    <div class="card" *ngFor="let cert of certificates">
+        <div class="card-content">
+            <p><strong class="label">Certificate Type:</strong> {{cert.certificateType}}</p>
+            <p><strong class="label">Serial Number:</strong> {{cert.serialNumber}}</p>
+            <p><strong class="label">Issuer:</strong> {{cert.issuer ? cert.issuer : cert.serialNumber}}</p>
+            <p><strong class="label">Valid From:</strong> {{cert.validFrom | date:'yyyy-MM-dd'}}</p>
+            <p><strong class="label">Valid To:</strong> {{cert.validTo | date:'yyyy-MM-dd'}}</p>
+            <p><strong class="label">Status:</strong> {{cert.status}}</p>
+          </div>
+    </div>
+  </div>
 </div>
 
 <app-footer></app-footer>
