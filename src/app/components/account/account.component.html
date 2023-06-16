@@ -1,11 +1,39 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 <app-navbar></app-navbar>
+<div class="margin">
 
-<!-- TODO: forma za validaciju telefona, ako nije validiran nek mu stoji neki uzvicnik
-    mogucnost da izmeni sifru i obavestenje da za regularno menjanje sifre -->
+    <h1 class="title">VALIDATE CERTIFICATE</h1>
+        <hr class="separator">
+        <div class="container2">
+            <input type="file" id="file-input" style="display: none" (change)="handleFileChange($event)">
+              <button class="btn" (click)="openFileInput()">Choose File</button>
+              <button class="btn" (click)="showDragDrop = false">Search</button>
+              
+        </div>
+        
+        <div class="container">
+            <div *ngIf="!showDragDrop">
+              <!-- Search section -->
+              <form [formGroup]="requestForm">
+                <div class="form-group">
+                    <label class="form-label" for="issuer" [class.active]="requestForm.controls['issuer'].value">Search:</label>
+                    <input style="width: auto;" type="text" id="issuer" formControlName="issuer" required>
+                    <button class="search-button btn" (click)="search(requestForm.controls['issuer'].value)">
+                        <i class="fas fa-search"></i>
+                      </button>  
+                </div>
+              </form>              
+            </div>
+            </div>
+            <div  *ngIf="isValidCertificate" class="validation-message valid">Certificate is valid!</div>
+            <div  *ngIf="isInValidCertificate" class="validation-message invalid">Certificate is invalid!</div>
+          
 
-<div style="height: 200px;">
-    <p>account works!</p>
 
 </div>
+    
+      
 
 <app-footer></app-footer>

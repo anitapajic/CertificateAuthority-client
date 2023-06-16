@@ -1,0 +1,108 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card {
+    width: 420px; /* Adjust the width as needed */
+    margin: 15px;
+    padding: 25px 30px 20px 30px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    text-align: left;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2); 
+
+  }
+  .margin{
+    margin-top: 200px;
+    margin-bottom: 50px;
+  }
+  .title{
+    text-align: center;
+    color: #3cd0d3;
+    font-size: 40px;
+  }
+  .separator {
+    width: 60%; /* Adjust the width as needed */
+    margin: 20px auto;  
+    border: none;
+    border-top: 2px solid #ccc;
+    margin-bottom: 60px;
+  }
+  .label {
+    display: inline-block;
+    width: 200px; /* Adjust the width as needed */
+  } 
+
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .circle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .circle-link {
+    text-decoration: none;
+  }
+  
+  .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-left: 40px;
+    background: #3cd0d3;
+    background: -webkit-linear-gradient(to right, #54b28c, #3cd0d3);
+    background: linear-gradient(to right, #54b28c, #3cd0d3);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    transition: 1s;
+  }
+  
+  .circle-text {
+    color: #fff;
+    font-size: 25px;
+  }
+  
+  .circle-label {
+    color: #000;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .circle:hover {
+    border-color: #3cd0d3;
+    transform: scale(1.1);
+  }
+  .ma{
+    margin-left: 35px;
+  }
+  .mr{
+    margin-left: 28px;
+  }
+  .mm{
+    margin-left: 35px;
+  }

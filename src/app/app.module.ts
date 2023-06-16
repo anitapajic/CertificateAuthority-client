@@ -20,6 +20,10 @@ import {
   SocialAuthServiceConfig, GoogleSigninButtonModule,
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,17 +36,22 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     CertificatesComponent,
     RequestsComponent,
     AccountComponent,
-    MakeRequestComponent
+    MakeRequestComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxCaptchaModule,
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    
   ],
   providers: [
     {
