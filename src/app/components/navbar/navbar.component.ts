@@ -16,6 +16,7 @@ export class NavbarComponent {
 
   }
 
+
   logout(){
     this.auth.logout().subscribe({
       next: (result) => {
