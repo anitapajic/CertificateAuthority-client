@@ -15,9 +15,25 @@
 		<form action="#" [formGroup]="userForm" *ngIf="!resetPass">
 			<h1>Sign in</h1>
 			<input type="email" placeholder="Email" formControlName="username"/>
-			<input type="password" placeholder="Password" formControlName="password"/>
+			<div  *ngIf="!twoFactorCodeIsSent">
+				<label for="type">Choose option: </label>
+				<select formControlName="type">
+					<option value="1">Telephone</option>
+					<option value="0">Mail</option>
+				</select>
+				
+				<button (click)="getTwoFactoreCode()" >GET CODE</button>
+
+			</div>
+
+			<div  *ngIf="twoFactorCodeIsSent">
+				<input type="password" placeholder="Password" formControlName="password"/>
+				<input type="text" placeholder="Code" formControlName="code">
+				<button (click)="signIn()" >SIGN IN</button>
+
+			</div>
+
 			<a (click)="forgotPass()">Forgot your password?</a>
-			<button (click)="signIn()" >Sign In</button>
       <div class="googleBtn">
         <asl-google-signin-button type=icon size=large></asl-google-signin-button>
       </div>

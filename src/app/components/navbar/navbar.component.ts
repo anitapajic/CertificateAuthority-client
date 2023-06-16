@@ -17,6 +17,7 @@ export class NavbarComponent {
 
   }
 
+
   logout(){
     this.socialAuthService.signOut();
     localStorage.removeItem('user');
