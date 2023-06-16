@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
 
-    if(this.authService.isLoggedIn()){
-      this.router.navigate(['/home']);
-    }
+    // if(this.authService.isLoggedIn()){
+    //   this.router.navigate(['/home']);
+    // }
 
     const signUpButton = document.getElementById('signUp') as HTMLElement | any;
     const signInButton = document.getElementById('signIn') as HTMLElement | any;
@@ -83,6 +83,9 @@ export class LoginComponent implements OnInit {
           if(error['error'] == "You need to change your password!"){
             alert(error['error'])
             this.forgotPass();
+          }
+          if(error['error'] == "Incorrect password or username!"){
+            alert(error['error'])
           }
           else{
             console.log(error)

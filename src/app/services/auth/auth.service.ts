@@ -59,7 +59,7 @@ export class AuthService {
 
   signIn(user: LoginDTO): Observable<Token> {
     return this.http.post<Token>(
-      'http://localhost:8085/api/user/login', user);
+      'http://localhost:8085/api/user/login', user, {headers: this.headers} );
   }
 
   signUp(user: IUser): Observable<strRepsonse> {
@@ -76,16 +76,16 @@ export class AuthService {
   }
 
   getTwoFactoreCode(twoFactor : TwoFactor): Observable<strRepsonse>{
-    return this.http.post<strRepsonse>('http://localhost:8085/api/user/twoFactor', twoFactor)
+    return this.http.post<strRepsonse>('http://localhost:8085/api/user/twoFactor', twoFactor, {headers: this.headers})
 
   }
   getResetCode(reset : resetCode): Observable<strRepsonse>{
-    return this.http.post<strRepsonse>('http://localhost:8085/api/user/getResetCode', reset)
+    return this.http.post<strRepsonse>('http://localhost:8085/api/user/getResetCode', reset, {headers: this.headers})
 
   }
 
   resetPassword(reset : resetCode): Observable<strRepsonse>{
-    return this.http.post<strRepsonse>('http://localhost:8085/api/user/resetPassword', reset)
+    return this.http.post<strRepsonse>('http://localhost:8085/api/user/resetPassword', reset, {headers: this.headers})
 
   }
   // Phone verification
