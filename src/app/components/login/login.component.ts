@@ -186,6 +186,7 @@ export class LoginComponent implements OnInit {
         next: (result) => {
           this.codeIsSent = false;
           this.resetPass = false;
+          this.twoFactorCodeIsSent = false;
           alert(result.response)
           this.userForm.get('password')!.reset();
         },
