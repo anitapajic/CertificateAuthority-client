@@ -1,0 +1,123 @@
+.container {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container2 {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .drag-drop-box {
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .title{
+    text-align: center;
+    color: #3cd0d3;
+    font-size: 40px;
+  }
+  .separator {
+    width: 60%; /* Adjust the width as needed */
+    margin: 20px auto;  
+    border: none;
+    border-top: 2px solid #ccc;
+    margin-bottom: 60px;
+  }
+  .margin{
+    margin-top: 200px;
+    margin-bottom: 40px;
+  }
+  .btn{
+    color: white;
+    margin: 10px;
+    background-color: #3cd0d3;
+  }
+
+  .search-button {
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+    border-radius: 50%;
+    background-color: #3cd0d3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .search-button:hover {
+    background-color: #219193;
+  }
+  .form-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    color: #777;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+  
+  .form-label.active {
+    top: -12px;
+    font-size: 12px;
+    color: #333;
+    background-color: #fff;
+    padding: 0 4px;
+  }
+  input[type="text"],
+  input[type="date"],
+  textarea,
+  select {
+    width: 300px; /* Adjust the width as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+a:not([href]):not([tabindex]) {
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  .choose-file-button {
+    padding: 10px 20px;
+    background-color: #3cd0d3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .choose-file-button:hover {
+    background-color: #54b28c;
+  }
+  .validation-message {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+  
+  .valid {
+    color: green;
+    font-size: 22px;
+    
+  }
+  .invalid {
+    color: red;
+    font-size: 22px;
+    
+  }

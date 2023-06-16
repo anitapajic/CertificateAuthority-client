@@ -8,7 +8,7 @@ import { MakeRequestComponent } from './components/make-request/make-request.com
 import { AccountComponent } from './components/account/account.component';
 
 const routes: Routes = [
-    {path : '', component: LoginComponent},
+    {path : '', component: LoginComponent}, 
     {path : 'login', component: LoginComponent},
     {path : 'home', component : HomeComponent},
     {path : 'certificates', component : CertificatesComponent},

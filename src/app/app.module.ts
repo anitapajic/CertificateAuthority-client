@@ -15,6 +15,10 @@ import { CertificatesComponent } from './components/certificates/certificates.co
 import { RequestsComponent } from './components/requests/requests.component';
 import { AccountComponent } from './components/account/account.component';
 import { MakeRequestComponent } from './components/make-request/make-request.component';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,15 +31,20 @@ import { MakeRequestComponent } from './components/make-request/make-request.com
     CertificatesComponent,
     RequestsComponent,
     AccountComponent,
-    MakeRequestComponent
+    MakeRequestComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxCaptchaModule,
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    
   ],
   providers: [
     {
