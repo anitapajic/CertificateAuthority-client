@@ -15,6 +15,11 @@ import { CertificatesComponent } from './components/certificates/certificates.co
 import { RequestsComponent } from './components/requests/requests.component';
 import { AccountComponent } from './components/account/account.component';
 import { MakeRequestComponent } from './components/make-request/make-request.component';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig, GoogleSigninButtonModule,
+} from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -36,13 +41,33 @@ import { MakeRequestComponent } from './components/make-request/make-request.com
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule
   ],
   providers: [
     {
     provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi: true,
-  }, ],
+  },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '365939378385-hl096imgi5cd2sgnsl2omlbcmld9h7k8.apps.googleusercontent.com'
+            )
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
