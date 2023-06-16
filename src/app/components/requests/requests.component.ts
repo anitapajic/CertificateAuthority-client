@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Request, RequestStatus } from 'src/app/models/Request';
+import { RejectinReason, Request, RequestStatus } from 'src/app/models/Request';
 import { CertService } from 'src/app/services/certificate/cert.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
@@ -97,10 +97,14 @@ export class RequestsComponent {
   }
 
   rejectRequest(request: Request){
-    this.certService.rejectRequest(request.id,request.reason!).subscribe({
+    const declineReason: RejectinReason = {
+      reason : request.reason!,
+    }
+    this.certService.rejectRequest(request.id,declineReason).subscribe({
       next: (result) => {
         console.log("Res ", result)
-        
+        window.location.reload()
+
       },
       error: (error) => {
         if (error instanceof HttpErrorResponse) {

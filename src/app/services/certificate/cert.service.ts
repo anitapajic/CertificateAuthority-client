@@ -57,7 +57,7 @@ export class CertService {
     return this.http.get<any>('http://localhost:8085/api/requests/accept/'+ id)
   }
 
-  rejectRequest(id : number, reason : string): Observable<Request> {
+  rejectRequest(id : number, reason : RejectinReason): Observable<Request> {
     return this.http.post<any>('http://localhost:8085/api/requests/reject/' + id, reason)
   }
 
