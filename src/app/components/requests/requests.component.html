@@ -1,13 +1,44 @@
 <app-navbar></app-navbar>
 
-<h1>ALL REQUESTS </h1>
-<div *ngFor="let req of requests">
-    <p>{{req.id}}</p>
-    <p>{{req.issuer}}</p>
-    <p>{{req.subjectUsername}}</p>
-    <p>{{req.validTo}}</p>
-    <p>{{req.certificateType}}</p>
-    <p>{{req.state}}</p>
-</div>
+<div class="margin">
 
+  <div class="container">
+    <div class="row">
+      <div class="circle-container">
+        <a class="circle-link">
+          <button class="circle-text circle" (click)="getAllRequests()">A</button>
+          <div class="circle-label ma">All requests</div>
+        </a>
+      </div>
+      <div class="circle-container">
+        <a  class="circle-link">
+          <button class="circle-text circle" id="reqForMe" (click)="getRequestsForMe()">RM</button>
+          <div class="circle-label mr">Requests for me</div>
+        </a>
+      </div>
+      <div class="circle-container">
+        <a class="circle-link">
+          <button class="circle-text circle" id="myReq" (click)="getMyRequests()">R</button>
+          <div class="circle-label mm">My requests</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+    <h1 class="title">{{ pageTitle }}</h1>
+    <hr class="separator">
+    <div class="card-container">
+        <div class="card" *ngFor="let req of requests" (click)="openConfirmationPopup(req)">
+            <div class="card-content">
+                <p><strong class="label">Id:</strong> {{req.id}}</p>
+                <p><strong class="label">Certificate Type:</strong> {{req.certificateType}}</p>
+                <p><strong class="label">Subject Username:</strong> {{req.subjectUsername}}</p>
+                <p><strong class="label">Issuer:</strong> {{req.issuer}}</p>
+                <p><strong class="label">Valid To:</strong> {{req.validTo | date:'yyyy-MM-dd'}}</p>
+                <p><strong class="label">State:</strong> {{req.state}}</p>
+              </div>
+        </div>  
+      </div>
+    </div>
+    
 <app-footer></app-footer>
