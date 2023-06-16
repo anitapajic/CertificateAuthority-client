@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import {SocialAuthService} from "@abacritt/angularx-social-login";
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class NavbarComponent {
 
-  constructor(private auth : AuthService, private router : Router){}
+  constructor(private auth : AuthService, private router : Router, private socialAuthService: SocialAuthService){}
 
   hello(){
     alert("Hello, " + this.auth.getRole())
@@ -18,17 +19,9 @@ export class NavbarComponent {
 
 
   logout(){
-    this.auth.logout().subscribe({
-      next: (result) => {
-        console.log(result)
-        localStorage.removeItem('user');
-        this.auth.setUser();
-        this.router.navigate(['\login']);
-      },
-      error: (error) => {
-        console.log(error)
-      },
-    });
+    this.socialAuthService.signOut();
+    localStorage.removeItem('user');
+    this.router.navigate(['']);
 
   }
 

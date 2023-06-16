@@ -34,7 +34,13 @@
 			</div>
 
 			<a (click)="forgotPass()">Forgot your password?</a>
+			<button (click)="signIn()" >Sign In</button>
+      <div class="googleBtn">
+        <asl-google-signin-button type=icon size=large></asl-google-signin-button>
+      </div>
+
 		</form>
+
 		<form action="#" [formGroup]="resetForm" *ngIf="resetPass">
 			<h1>Reset password</h1>
 
@@ -44,7 +50,7 @@
 					<option value="0">Telephone</option>
 					<option value="1">Mail</option>
 				</select>
-				
+
 				<input type="phone" placeholder="Telephone" formControlName="telephone" *ngIf="resetForm.get('type')?.value === '0'" />
 				<input type="email" placeholder="Email" formControlName="username" *ngIf="resetForm.get('type')?.value === '1'" />
 				<button (click)="getResetCode()" >GET RESET CODE</button>
