@@ -23,7 +23,10 @@ export class CertService {
   }
 
   validateCertficateByCopy(file : File): Observable<any> {
-    return this.http.post('http://localhost:8085/api/certificate/validateByCopy', file)
+    const formData: FormData = new FormData();
+    formData.append('File', file, file.name);
+  
+    return this.http.post('http://localhost:8085/api/certificate/validateByCopy', formData, { responseType: 'text' })
   }
 
   downloadCertficateById(id : number): Observable<any> {
@@ -61,4 +64,9 @@ export class CertService {
     return this.http.post<any>('http://localhost:8085/api/requests/reject/' + id, reason)
   }
 
+  downloadFile(id: number){
+    return this.http.get(`http://localhost:8085/api/certificate/download/${id}`, {
+      responseType: 'blob'
+    })
+  }
 }

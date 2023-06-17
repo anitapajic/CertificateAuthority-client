@@ -2,6 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Certificate } from 'src/app/models/Certificate';
 import { CertService } from 'src/app/services/certificate/cert.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { saveAs } from 'file-saver';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-certificates',
@@ -12,7 +19,7 @@ export class CertificatesComponent implements OnInit {
 
   certificates : Certificate[] = new Array<Certificate>();
 
-  constructor(private certService: CertService){}
+  constructor(private certService: CertService, private http: HttpClient){}
   
   ngOnInit(): void {
 
@@ -31,4 +38,9 @@ export class CertificatesComponent implements OnInit {
     })
   }
 
+  downloadFile(id: number){
+    this.certService.downloadFile(id).subscribe(blob => {
+      saveAs(blob, `${id}.zip`);
+    });
+  }
 }
