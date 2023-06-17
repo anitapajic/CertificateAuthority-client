@@ -37,7 +37,6 @@ export class CertificatesComponent implements OnInit {
   }
 
   checkUser(username : string): any {
-    console.log(username)
     return this.role == "ADMIN" || username == this.username;
   }
 

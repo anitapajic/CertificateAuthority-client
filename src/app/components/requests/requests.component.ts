@@ -5,6 +5,7 @@ import { CertService } from 'src/app/services/certificate/cert.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
 import { Location } from '@angular/common';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 
 @Component({
@@ -13,13 +14,14 @@ import { Location } from '@angular/common';
   styleUrls: ['./requests.component.css']
 })
 export class RequestsComponent {
+
   requests : Request[] = new Array<Request>();
   pageTitle: string = '';
   displayAllRequests: boolean = false;
   displayRequestsForMe : boolean = false;
   displayMyRequests: boolean = false;
   
-  constructor(private certService: CertService, private dialog: MatDialog,private location: Location){}
+  constructor(private certService: CertService, private dialog: MatDialog,private location: Location, private auth : AuthService){}
   
   ngOnInit(): void {
 
@@ -143,5 +145,10 @@ export class RequestsComponent {
         }
       });
     }
+  }
+
+
+  isAdmin(): any {
+    return this.auth.getRole() == "ADMIN";
   }
 }
