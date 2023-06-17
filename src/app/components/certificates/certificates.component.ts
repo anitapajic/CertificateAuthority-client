@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Certificate } from 'src/app/models/Certificate';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { CertService } from 'src/app/services/certificate/cert.service';
 
 @Component({
@@ -10,12 +11,16 @@ import { CertService } from 'src/app/services/certificate/cert.service';
 })
 export class CertificatesComponent implements OnInit {
 
+  role! : string;
+  username! : string;
+
   certificates : Certificate[] = new Array<Certificate>();
 
-  constructor(private certService: CertService){}
+  constructor(private certService: CertService, private auth : AuthService){}
   
   ngOnInit(): void {
-
+    this.role = this.auth.getRole();
+    this.username = this.auth.getUsername();
     this.certService.getAlCertificates().subscribe({
       next: (result) => {
         console.log("Res ", result)
@@ -29,6 +34,11 @@ export class CertificatesComponent implements OnInit {
         }
       }
     })
+  }
+
+  checkUser(username : string): any {
+    console.log(username)
+    return this.role == "ADMIN" || username == this.username;
   }
 
 }

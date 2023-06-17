@@ -21,11 +21,18 @@ export class MakeRequestComponent {
   siteKey: string = "6LdSTJ8mAAAAAAVVK5_mZUUVKl-kEDPhl6YZz_Z7";
   isWaiting : boolean = false;
   certificates : Certificate[] = new Array<Certificate>();
+  isAdmin!: boolean;
 
 
-  constructor(private formBuilder: FormBuilder, private router : Router,private certService : CertService) {}
+  constructor(private formBuilder: FormBuilder, private router : Router,private certService : CertService, private auth : AuthService) {}
 
   ngOnInit(): void {
+    if(this.auth.getRole() == "ADMIN"){
+      this.isAdmin = true;
+    }
+    else{
+      this.isAdmin = false;
+    }
     
     this.certService.getAlCertificates().subscribe({
       next: (result) => {

@@ -35,7 +35,7 @@
           <select id="certificateType" formControlName="certificateType">
             <option value="End">END</option>
             <option value="Intermediate">INTERMEDIATE</option>
-            <option value="Root">ROOT</option>
+            <option *ngIf="isAdmin" value="Root">ROOT</option>
           </select>
         </div>
         

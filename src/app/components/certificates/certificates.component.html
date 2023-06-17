@@ -12,6 +12,7 @@
             <p><strong class="label">Valid From:</strong> {{cert.validFrom | date:'yyyy-MM-dd'}}</p>
             <p><strong class="label">Valid To:</strong> {{cert.validTo | date:'yyyy-MM-dd'}}</p>
             <p><strong class="label">Status:</strong> {{cert.status}}</p>
+            <p *ngIf="checkUser(cert.username)"> Redraw</p>
           </div>
     </div>
   </div>
