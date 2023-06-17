@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Certificate } from 'src/app/models/Certificate';
+import { Certificate, certType } from 'src/app/models/Certificate';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CertService } from 'src/app/services/certificate/cert.service';
 
@@ -35,9 +35,35 @@ export class CertificatesComponent implements OnInit {
       }
     })
   }
+  redrawCertificateBySN(sn : string){
+    this.certService.redrawCertificateBySN(sn).subscribe({
+      next: (result) => {
+        console.log("Res ", result)
+    
+      },
+      error: (error) => {
+        if (error instanceof HttpErrorResponse) {
+          // alert(error.error)
+          console.log("ERR ", error);
+        
+        }
+      }
+    })
+  }
+  checkUser(username : string, cert:Certificate): any {
+    return (this.role == "ADMIN" || username == this.username ) && cert.isRevoked == false ;
+  }
 
-  checkUser(username : string): any {
-    return this.role == "ADMIN" || username == this.username;
+  redraw(cert:Certificate){
+    this.redrawCertificateBySN(cert.serialNumber)
+    console.log(cert.certificateType.toString());
+    console.log(certType[certType.ROOT]);
+  if ( cert.certificateType.toString().toUpperCase() === certType[certType.ROOT] ) {
+    alert("You cannot redraw a root certificate.");
+  } else {
+    this.redrawCertificateBySN(cert.serialNumber);
+    alert("You successfuly redraw certificate "+ cert.serialNumber);
+  }
   }
 
 }
