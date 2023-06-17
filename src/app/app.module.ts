@@ -24,6 +24,7 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { TelephoneVerificationComponent } from './components/telephone-verification/telephone-verification.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     RequestsComponent,
     AccountComponent,
     MakeRequestComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    TelephoneVerificationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Verification</h2>
+<mat-dialog-content>
+  <p>Verify your phone number</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div [formGroup]="myForm">
+    <div *ngIf="!codeIsSent">
+      <input matInput class="in" placeholder="Enter your phone number" formControlName="phoneNumber">
+      <button mat-button class="accept" (click)="sendCode()">Send verification code</button>
+    </div>
+
+
+    <div *ngIf="codeIsSent">
+        <input matInput class="in" placeholder="Enter your code" formControlName="code">
+        <button mat-button class="accept" (click)="verify()">Verify</button>
+    </div>
+  </div>
+</mat-dialog-actions>

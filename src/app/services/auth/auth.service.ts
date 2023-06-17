@@ -32,7 +32,6 @@ export class AuthService {
   getRole(): any {
     if (this.isLoggedIn()) {
       var accessToken: any = localStorage.getItem('user');
-      const helper = new JwtHelperService();
 
 
       this.userId = JSON.parse(accessToken)['id'];
@@ -40,6 +39,19 @@ export class AuthService {
 
       const role = JSON.parse(accessToken)['role'];
       return role;
+    }
+    return null;
+  }
+
+  isVerified(): any {
+    if (this.isLoggedIn()) {
+      var accessToken: any = localStorage.getItem('user');
+
+
+      this.userId = JSON.parse(accessToken)['id'];
+
+
+      return this.userId;
     }
     return null;
   }
@@ -102,6 +114,17 @@ export class AuthService {
 
   }
   // Phone verification
+
+  getVerificationCode(telephone : string): Observable<strRepsonse>{
+    return this.http.get<strRepsonse>('http://localhost:8085/api/user/verify/' + telephone)
+
+  }
+
+  verify(code : string): Observable<strRepsonse>{
+    return this.http.post<strRepsonse>('http://localhost:8085/api/user/verify/' + code, null);
+
+  }
+
 
     // verify(user : IUser): Observable<string> {
     //   this.userId = 0;
