@@ -4,10 +4,10 @@
 
   <div class="container">
     <div class="row">
-      <div class="circle-container">
+      <div  *ngIf="isAdmin()" class="circle-container">
         <a class="circle-link">
           <button class="circle-text circle" (click)="getAllRequests()">A</button>
-          <div class="circle-label ma">All requests</div>
+          <div  class="circle-label ma">All requests</div>
         </a>
       </div>
       <div class="circle-container">

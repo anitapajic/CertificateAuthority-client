@@ -12,6 +12,8 @@
             <p><strong class="label">Valid From:</strong> {{cert.validFrom | date:'yyyy-MM-dd'}}</p>
             <p><strong class="label">Valid To:</strong> {{cert.validTo | date:'yyyy-MM-dd'}}</p>
             <p><strong class="label">Status:</strong> {{cert.status}}</p>
+            <p><strong class="label">Redrawed:</strong> {{cert.isRevoked}}</p>
+            <button class="btn button" *ngIf="checkUser(cert.username, cert)" (click)="redraw(cert)"> Redraw</button>
           </div>
     </div>
   </div>

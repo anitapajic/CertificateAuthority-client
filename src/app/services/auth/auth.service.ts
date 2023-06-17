@@ -37,14 +37,22 @@ export class AuthService {
 
       this.userId = JSON.parse(accessToken)['id'];
 
-      //ovo je username
-      const role = helper.decodeToken(accessToken).sub;
 
+      const role = JSON.parse(accessToken)['role'];
       return role;
     }
     return null;
   }
 
+  getUsername(): any{
+    if (this.isLoggedIn()) {
+      var accessToken: any = localStorage.getItem('user');
+      const helper = new JwtHelperService();
+      const username = helper.decodeToken(accessToken).sub;
+      return username;
+    }
+    return null;
+  }
   setUser(): void {
     this.user$.next(this.getRole());
   }
