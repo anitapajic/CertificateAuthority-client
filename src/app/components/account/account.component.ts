@@ -16,6 +16,7 @@ export class AccountComponent {
   issuer: string = '';
   isValidCertificate: boolean = false;
   isInValidCertificate: boolean = false;
+  isInValidFile: boolean = false;
 
   constructor(private formBuilder: FormBuilder,private certService: CertService) {}
 
@@ -29,7 +30,15 @@ export class AccountComponent {
   handleFileChange(event: any) {
     const selectedFile = event.target.files[0];
     console.log(selectedFile);
+
+  if (selectedFile.name.endsWith(".crt")) {
     this.validateCertficateByC(selectedFile);
+  } else {
+    console.log("Invalid file format. Please select a .crt file.");
+    this.isValidCertificate = false; 
+    this.isInValidCertificate = false; 
+    this.isInValidFile = true;
+  }
   }
 
   validateCertificate(sn: string){
@@ -40,10 +49,12 @@ export class AccountComponent {
       if(result.includes('invalid')){
         this.isValidCertificate = false; 
         this.isInValidCertificate = true; 
+        this.isInValidFile = false;
       }
       else if(result.includes('valid')){
         this.isValidCertificate = true; 
         this.isInValidCertificate = false; 
+        this.isInValidFile = false;
       }
       else{
         console.log(result)
@@ -54,18 +65,23 @@ export class AccountComponent {
   }
 
   validateCertficateByC(file : File){
-    this.certService.validateCertficateByCopy(file).subscribe({
-      next: (result) => {
-        console.log("Res ", result)
-      },
-      error: (error) => {
-        if (error instanceof HttpErrorResponse) {
-          // alert(error.error)
-          console.log("ERR ", error);
-        
-        }
+    this.certService.validateCertficateByCopy(file).subscribe( (result) => {
+      console.log("Res ", result)
+      if(result.includes('invalid')){
+        this.isValidCertificate = false; 
+        this.isInValidCertificate = true; 
+        this.isInValidFile = false;
       }
-    })
+      else if(result.includes('valid')){
+        this.isValidCertificate = true; 
+        this.isInValidCertificate = false; 
+        this.isInValidFile = false;
+      }
+      else{
+        console.log(result)
+      }
+
+      })
   }
 
   openFileInput() {
