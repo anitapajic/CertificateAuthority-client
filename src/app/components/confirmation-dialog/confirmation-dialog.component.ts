@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Request, RequestStatus } from 'src/app/models/Request';
+import { RejectinReason, Request, RequestStatus } from 'src/app/models/Request';
 import { CertService } from 'src/app/services/certificate/cert.service';
 import { HttpErrorResponse } from '@angular/common/http';
 @Component({
@@ -10,21 +10,24 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ConfirmationDialogComponent {
   showReasonInput: boolean = false;
-  declineReason: string = '';
+   declineReason!: RejectinReason;
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Request,private certService: CertService
   ) { }
 
   rejectRequest(request: Request) {
+    this.declineReason = {
+      reason : request.reason!,
+    }
     this.certService.rejectRequest(request.id, this.declineReason).subscribe({
       next: (result) => {
         console.log("Res ", result);
-        // Handle the response from the server after rejecting the request
+        window.location.reload()
+
       },
       error: (error) => {
         if (error instanceof HttpErrorResponse) {
-          // Handle the error response from the server
           console.log("ERR ", error);
         }
       }

@@ -1,22 +1,49 @@
 <app-navbar></app-navbar>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
+
+
 <!-- TODO: forma za kreiranje zahteva MOZE POPUP -->
 <div class="margin">
 <h1 class="title">MAKE REQUEST</h1>
 <hr class="separator">
-<div class="card-container ">
+
+<div class="rectangle left white" id="searchingForRide" *ngIf="isWaiting">
+  
+  <div  style="width:50%;margin-left: 25%;height:0;padding-bottom:75%;position:relative;">
+    <iframe src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40"  width="100%" height="30%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+  </div>
+</div>
+<div class="card-container " *ngIf="!isWaiting">
+
+
 
     <form [formGroup]="requestForm" (ngSubmit)="submitForm()" class="form-container">
 
-        <div class="form-group">
-          <label class="form-label" for="issuer" [class.active]="requestForm.controls['issuer'].value">Issuer:</label>
-          <input type="text" id="issuer" formControlName="issuer" >
-        </div>
+      <div class="form-group">
+        <label class="form-label" for="issuerSN" [class.active]="requestForm.controls['issuerSN'].value">Issuer:</label>
+        <br><br>
+        <select id="issuer" formControlName="issuerSN">
+          <option *ngFor="let certificate of certificates" [value]="certificate.serialNumber">{{ certificate.serialNumber + " " + certificate.certificateType + " " + certificate.username}}</option>
+        </select>
+      </div>
+      
 
         <div class="form-group">
-          <label class="form-label" for="validTo" [class.active]="requestForm.controls['validTo'].value"></label>
-          <input type="date" id="validTo" formControlName="validTo" placeholder="" >
+          <label class="form-label" for="certificateType" [class.active]="requestForm.controls['certificateType'].value">Certificate type:</label>
+          <br>
+          <select id="certificateType" formControlName="certificateType">
+            <option value="End">END</option>
+            <option value="Intermediate">INTERMEDIATE</option>
+            <option value="Root">ROOT</option>
+          </select>
+        </div>
+        
+
+        <div class="form-group">
+          <label class="form-label" for="date" [class.active]="requestForm.controls['date'].value">Valid to:</label>
+          <br><br>
+          <input type="date" id="date" formControlName="date" placeholder="" >
         </div>
 
         <!-- <div class="form-group">
@@ -27,15 +54,11 @@
             </select>
           </div> -->
        
-        <div class="form-group">
-          <label class="form-label" for="subjectUsername" [class.active]="requestForm.controls['subjectUsername'].value">Subject Username:</label>
-          <input type="text" id="subjectUsername" formControlName="subjectUsername" >
-        </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label class="form-label" for="reason" [class.active]="requestForm.controls['reason'].value">Reason:</label>
           <textarea id="reason" formControlName="reason"></textarea>
-        </div>
+        </div> -->
 
         <div class="form-group">
             <div class="g-recaptcha" data-sitekey="6LdSTJ8mAAAAAAVVK5_mZUUVKl-kEDPhl6YZz_Z7">
@@ -48,11 +71,11 @@
             </div>
           </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label class="form-label" for="issuerUsername" [class.active]="requestForm.controls['issuerUsername'].value">Issuer Username:</label>
           <input type="text" id="issuerUsername" formControlName="issuerUsername" >
-        </div>
-        <button type="submit" [disabled]="requestForm.invalid">Submit</button>
+        </div> -->
+        <button type="submit" [disabled]="!aFormGroup.valid">Submit</button>
      
       </form>      
 </div>
