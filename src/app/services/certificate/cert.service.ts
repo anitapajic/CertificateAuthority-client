@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Certificate } from 'src/app/models/Certificate';
-import { RejectinReason, Request } from 'src/app/models/Request';
+import { MakeRequest, RejectinReason, Request } from 'src/app/models/Request';
 import { strRepsonse } from 'src/app/models/strResponse';
 
 @Injectable({
@@ -52,7 +52,7 @@ export class CertService {
   }
 
 
-  createRequest(request : Request): Observable<Request> {
+  createRequest(request : MakeRequest): Observable<Request> {
     return this.http.post<Request>('http://localhost:8085/api/requests/create', request)
   }
 
@@ -60,7 +60,7 @@ export class CertService {
     return this.http.get<any>('http://localhost:8085/api/requests/accept/'+ id)
   }
 
-  rejectRequest(id : number, reason : string): Observable<Request> {
+  rejectRequest(id : number, reason : RejectinReason): Observable<Request> {
     return this.http.post<any>('http://localhost:8085/api/requests/reject/' + id, reason)
   }
 
