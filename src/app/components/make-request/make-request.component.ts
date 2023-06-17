@@ -62,7 +62,7 @@ export class MakeRequestComponent {
     this.requestForm = this.formBuilder.group({
       issuerSN: ['', Validators.required],
       date: ['', Validators.required],
-      certificateType: ['END', Validators.required],
+      certificateType: ['End', Validators.required],
     });
   }
 

@@ -33,9 +33,9 @@
           <label class="form-label" for="certificateType" [class.active]="requestForm.controls['certificateType'].value">Certificate type:</label>
           <br>
           <select id="certificateType" formControlName="certificateType">
-            <option value="End">END</option>
-            <option value="Intermediate">INTERMEDIATE</option>
-            <option *ngIf="isAdmin" value="Root">ROOT</option>
+            <option value="End">End</option>
+            <option value="Intermediate">Intermediate</option>
+            <option *ngIf="isAdmin" value="Root">Root</option>
           </select>
         </div>
         

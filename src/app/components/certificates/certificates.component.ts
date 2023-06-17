@@ -58,7 +58,7 @@ export class CertificatesComponent implements OnInit {
     })
   }
   checkUser(username : string, cert:Certificate): any {
-    return (this.role == "ADMIN" || username == this.username ) && cert.isRevoked == false ;
+    return (this.role == "ADMIN" || username == this.username ) && cert.isRevoked == false && (cert.certificateType.toString().toUpperCase() != certType[certType.ROOT]) ;
   }
 
   redraw(cert:Certificate){
