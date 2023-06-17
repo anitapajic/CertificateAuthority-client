@@ -4,7 +4,7 @@
 <h1 class="title">CERTIFICATES</h1>
 <hr class="separator">
 <div class="card-container">
-    <div class="card" *ngFor="let cert of certificates">
+    <div class="card" *ngFor="let cert of certificates" (click)="downloadFile(cert.id)">
         <div class="card-content">
             <p><strong class="label">Certificate Type:</strong> {{cert.certificateType}}</p>
             <p><strong class="label">Serial Number:</strong> {{cert.serialNumber}}</p>

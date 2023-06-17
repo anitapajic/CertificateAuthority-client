@@ -1,5 +1,5 @@
 export interface Certificate{
-    id: string,
+    id: number,
     serialNumber: string,
     signatureAlgorithm: string,
     issuer: string | null,

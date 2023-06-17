@@ -3,6 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { Certificate, certType } from 'src/app/models/Certificate';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CertService } from 'src/app/services/certificate/cert.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { saveAs } from 'file-saver';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-certificates',
@@ -16,7 +23,7 @@ export class CertificatesComponent implements OnInit {
 
   certificates : Certificate[] = new Array<Certificate>();
 
-  constructor(private certService: CertService, private auth : AuthService){}
+  constructor(private certService: CertService, private auth : AuthService,private http: HttpClient){}
   
   ngOnInit(): void {
     this.role = this.auth.getRole();
@@ -66,4 +73,9 @@ export class CertificatesComponent implements OnInit {
   }
   }
 
+  downloadFile(id: number){
+    this.certService.downloadFile(id).subscribe(blob => {
+      saveAs(blob, `${id}.zip`);
+    });
+  }
 }
