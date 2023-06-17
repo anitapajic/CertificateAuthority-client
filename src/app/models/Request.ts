@@ -11,6 +11,13 @@ export interface Request{
     issuerUsername: string
 }
 
+export interface MakeRequest{
+    issuerSN: string,
+    date: Date,
+    certificateType: certType,   
+}
+
+
 export interface RejectinReason{
     reason : string
 }
